@@ -100,9 +100,10 @@
         <div class="love-message">Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire. Je t’aime infiniment ! 💕</div>
         <div class="hidden-message">Tu es la plus belle, mon amour éternel 😘</div>
         <div class="gallery">
-            <img src="photo1.jpg" class="photo">
-            <img src="photo2.jpg" class="photo">
-            <img src="photo3.jpg" class="photo">
+            <img src="photo1.jpg.jpg" class="photo">
+            <img src="photo2.jpg.jpg" class="photo">
+            <img src="photo3.jpg.jpg" class="photo">
+            <img src="photo4.jpg.jpg" class="photo">
         </div>
         <div class="countdown">Surprise dans <span id="timer">10</span> secondes...</div>
     </div>
