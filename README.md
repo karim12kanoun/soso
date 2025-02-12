@@ -89,17 +89,16 @@
     </style>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="romantic-music.mp3" type="audio/mpeg">
-    </audio>
+    
+  
     <div class="container">
-        <h2>Veux-tu être ma Valentine ? 💖</h2>
+        <h2>Man chat tu veux bien être ma Valentine ? 💖</h2>
         <div class="buttons">
             <button class="yes" onclick="showLove()">Oui</button>
             <button class="no" onclick="moveButton(this)">Non</button>
         </div>
-        <div class="love-message">Je t'aime ! 💕</div>
-        <div class="hidden-message">Tu es la plus belle 😘</div>
+        <div class="love-message">Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire. Je t’aime infiniment ! 💕</div>
+        <div class="hidden-message">Tu es la plus belle, mon amour éternel 😘</div>
         <div class="gallery">
             <img src="photo1.jpg" class="photo">
             <img src="photo2.jpg" class="photo">
@@ -108,8 +107,12 @@
         <div class="countdown">Surprise dans <span id="timer">10</span> secondes...</div>
     </div>
     <script>
+        function playMusic() {
+            document.getElementById("bg-music").play();
+        }
         function showLove() {
             document.querySelector('.love-message').style.display = 'block';
+            document.querySelector('.love-message').style.opacity = '1';
             for (let i = 0; i < 10; i++) {
                 let heart = document.createElement('div');
                 heart.classList.add('hearts');
