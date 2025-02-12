@@ -26,6 +26,7 @@
         }
         .buttons {
             margin-top: 20px;
+            position: relative;
         }
         button {
             padding: 10px 20px;
@@ -115,9 +116,6 @@
         <div class="countdown">Surprise dans <span id="timer">10</span> secondes...</div>
     </div>
     <script>
-        function playMusic() {
-            document.getElementById("bg-music").play();
-        }
         function showLove() {
             document.querySelector('.love-message').style.display = 'block';
             document.querySelector('.love-message').style.opacity = '1';
@@ -149,8 +147,9 @@
             }, 1000);
         }
         function moveButton(button) {
-            const maxX = window.innerWidth - button.offsetWidth;
-            const maxY = window.innerHeight - button.offsetHeight;
+            const container = document.querySelector('.container');
+            const maxX = container.offsetWidth - button.offsetWidth;
+            const maxY = container.offsetHeight - button.offsetHeight;
             const newX = Math.random() * maxX;
             const newY = Math.random() * maxY;
             button.style.left = `${newX}px`;
