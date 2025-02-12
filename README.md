@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -43,7 +42,7 @@
 <body>
 
     <div class="container">
-        <button class="magic-button" onclick="moveButton()">Clique-moi !</button>
+        <button class="magic-button" onclick="moveButton()">non !</button>
     </div>
 
     <script>
@@ -72,7 +71,7 @@
                 button.style.top = `${newY}px`;
 
                 button.style.opacity = '1'; // Réapparition
-            }, 500);
+            }, 50);
         }
     </script>
 
