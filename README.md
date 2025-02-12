@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -15,6 +15,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             overflow: hidden;
+            flex-direction: column;
         }
         .container {
             background: white;
@@ -75,6 +76,12 @@
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
         }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
         .gallery img {
             width: 200px;
             height: auto;
@@ -90,7 +97,6 @@
 </head>
 <body>
     
-  
     <div class="container">
         <h2>Man chat tu veux bien être ma Valentine ? 💖</h2>
         <div class="buttons">
@@ -104,6 +110,7 @@
             <img src="photo2.jpg.jpg" class="photo">
             <img src="photo3.jpg.jpg" class="photo">
             <img src="photo4.jpg.jpg" class="photo">
+
         </div>
         <div class="countdown">Surprise dans <span id="timer">10</span> secondes...</div>
     </div>
