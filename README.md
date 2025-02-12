@@ -1,79 +1,87 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bouton Magique</title>
+    <title>Pour Toi, Mon Amour 💖</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #ffe4e1;
             margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
-
         .container {
-            width: 80vw; /* Zone du bouton */
-            height: 80vh;
-            background-color: white;
-            border: 2px solid #007BFF;
-            position: relative; /* Important pour positionner le bouton en absolu */
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
         }
-
-        .magic-button {
-            position: absolute; /* Position absolue pour rester dans le cadre */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 15px 30px;
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
             font-size: 18px;
-            background-color: #007BFF;
-            color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: opacity 0.3s, left 0.5s ease-in-out, top 0.5s ease-in-out;
+            margin: 5px;
+        }
+        .yes {
+            background-color: #ff1493;
+            color: white;
+        }
+        .no {
+            background-color: #ff4d4d;
+            color: white;
+            position: absolute;
+        }
+        .love-message {
+            display: none;
+            font-size: 30px;
+            color: #ff1493;
+            font-weight: bold;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: loveAnimation 2s forwards;
+        }
+        @keyframes loveAnimation {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <button class="magic-button" onclick="moveButton()">non !</button>
+        <h2>Veux-tu être ma Valentine ? 💖</h2>
+        <div class="buttons">
+            <button class="yes" onclick="showLove()">Oui</button>
+            <button class="no" onclick="moveButton(this)">Non</button>
+        </div>
+        <div class="love-message">Je t'aime ! 💕</div>
     </div>
 
     <script>
-        function moveButton() {
-            const button = document.querySelector('.magic-button');
-            const container = document.querySelector('.container');
+        function showLove() {
+            document.querySelector('.love-message').style.display = 'block';
+        }
 
-            button.style.opacity = '0'; // Disparition
-
-            setTimeout(() => {
-                // Obtenir les dimensions du conteneur et du bouton
-                const containerRect = container.getBoundingClientRect();
-                const buttonWidth = button.offsetWidth;
-                const buttonHeight = button.offsetHeight;
-
-                // Calculer des nouvelles positions aléatoires DANS le conteneur
-                const minX = 0;
-                const minY = 0;
-                const maxX = containerRect.width - buttonWidth;
-                const maxY = containerRect.height - buttonHeight;
-                const newX = Math.random() * (maxX - minX) + minX;
-                const newY = Math.random() * (maxY - minY) + minY;
-
-                // Appliquer la nouvelle position
-                button.style.left = `${newX}px`;
-                button.style.top = `${newY}px`;
-
-                button.style.opacity = '1'; // Réapparition
-            }, 50);
+        function moveButton(button) {
+            const maxX = window.innerWidth - button.offsetWidth;
+            const maxY = window.innerHeight - button.offsetHeight;
+            
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            
+            button.style.left = `${newX}px`;
+            button.style.top = `${newY}px`;
         }
     </script>
-
 </body>
 </html>
