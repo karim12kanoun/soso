@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -98,41 +98,10 @@
             color: white;
             position: absolute;
         }
-
-        /* Effets visuels */
-        .petal {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: pink;
-            opacity: 0.8;
-            border-radius: 50%;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        .light {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px white;
-            opacity: 0.7;
-            animation: twinkle infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.2; }
-            100% { opacity: 1; }
-        }
     </style>
 </head>
 <body>
+    <!-- Écran de chargement -->
     <div class="loading-screen">
         <div class="loading-text">Bonne Saint-Valentin à distance mon cœur 💕 <br> Chargement en cours...</div>
         <div class="progress-bar">
@@ -140,8 +109,8 @@
         </div>
     </div>
 
-   
-
+    <!-- Contenu principal -->
+    <div class="main-content">
         <div class="container">
             <h2>Mon chat, tu veux bien être ma Valentine ? ❤️</h2>
             <div id="typewriter"></div>
@@ -170,13 +139,12 @@
                         setTimeout(() => {
                             loadingScreen.style.display = "none";
                             mainContent.style.opacity = "1";
-                            mainContent.style.pointer-events = "auto";
+                            mainContent.style.pointerEvents = "auto";
                             typeWriter();
-                            createEffects();
                         }, 1000);
                     }, 500);
                 }
-            }, 30); // Augmente la barre de progression progressivement
+            }, 30); // Animation fluide de la barre de chargement
         });
 
         function typeWriter() {
@@ -197,28 +165,9 @@
         }
 
         function moveButton(button) {
-            let x = Math.random() * (window.innerWidth - 100);
-            let y = Math.random() * (window.innerHeight - 50);
+            let x = Math.random() * (window.innerWidth - button.offsetWidth - 50);
+            let y = Math.random() * (window.innerHeight - button.offsetHeight - 50);
             button.style.transform = `translate(${x}px, ${y}px)`;
-        }
-
-        function createEffects() {
-            for (let i = 0; i < 50; i++) {
-                let petal = document.createElement('div');
-                petal.classList.add('petal');
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                document.body.appendChild(petal);
-            }
-
-            for (let i = 0; i < 100; i++) {
-                let light = document.createElement('div');
-                light.classList.add('light');
-                light.style.left = Math.random() * 100 + 'vw';
-                light.style.top = Math.random() * 100 + 'vh';
-                light.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                document.body.appendChild(light);
-            }
         }
     </script>
 </body>
