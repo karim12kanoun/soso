@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
             overflow: hidden;
             flex-direction: column;
             position: relative;
-            background: #ffe6f2; /* Fond rose pastel doux */
+            background: #ffe6f2;
         }
 
         /* Écran de chargement */
@@ -27,7 +27,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ff1493; /* Rose vif */
+            background: #ff1493;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -58,7 +58,6 @@
             transition: width 3s linear;
         }
 
-        /* Masquer la page au début */
         .main-content {
             opacity: 0;
             transition: opacity 1s ease-in-out;
@@ -149,12 +148,44 @@
             position: absolute;
         }
 
+        /* Pétales de rose */
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: pink;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Lumières scintillantes */
+        .light {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            opacity: 0.7;
+            animation: twinkle infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
     </style>
 </head>
 <body>
-    <!-- Écran de chargement -->
     <div class="loading-screen">
-        <div class="loading-text">Bonne saint valentin mon chat ! <br> Chargement en cours...</div>
+        <div class="loading-text">Chargement en cours...</div>
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
@@ -184,7 +215,6 @@
     </div>
 
     <script>
-        // Effet machine à écrire
         const text = "T'es la personne la plus importante de ma vie. Je t'aime plus que tout mon bébé ! ❤️";
         let index = 0;
         function typeWriter() {
@@ -195,59 +225,40 @@
             }
         }
 
-        // Barre de chargement
         window.onload = function() {
             let progress = document.querySelector('.progress');
             let loadingScreen = document.querySelector('.loading-screen');
             let mainContent = document.querySelector('.main-content');
 
-            // Remplir la barre de progression
             progress.style.width = "100%";
 
-            // Après 3 secondes, masquer l'écran de chargement et afficher la page
             setTimeout(() => {
                 loadingScreen.style.opacity = "0";
                 setTimeout(() => {
                     loadingScreen.style.display = "none";
                     mainContent.style.opacity = "1";
-                    typeWriter(); // Démarrer l'effet machine à écrire
+                    typeWriter();
+
+                    for (let i = 0; i < 50; i++) {
+                        let petal = document.createElement('div');
+                        petal.classList.add('petal');
+                        petal.style.left = Math.random() * 100 + 'vw';
+                        petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                        document.body.appendChild(petal);
+                    }
+
+                    for (let i = 0; i < 100; i++) {
+                        let light = document.createElement('div');
+                        light.classList.add('light');
+                        light.style.left = Math.random() * 100 + 'vw';
+                        light.style.top = Math.random() * 100 + 'vh';
+                        light.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                        document.body.appendChild(light);
+                    }
+
                 }, 1000);
             }, 3000);
         };
-
-        // Affichage du message d'amour
-        function showLove() {
-            alert("Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire NHABEEEEK ❤️");
-        }
-       // Pétales de rose
-            for (let i = 0; i < 50; i++) {
-                let petal = document.createElement('div');
-                petal.classList.add('petal');
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                document.body.appendChild(petal);
-            }
-
-            // Lumières scintillantes
-            for (let i = 0; i < 100; i++) {
-                let light = document.createElement('div');
-                light.classList.add('light');
-                light.style.left = Math.random() * 100 + 'vw';
-                light.style.top = Math.random() * 100 + 'vh';
-                light.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                document.body.appendChild(light);
-            }
-        }
-        // Bouton "Non" qui se déplace
-        function moveButton(button) {
-            const container = document.querySelector('.container');
-            const maxX = container.offsetWidth - button.offsetWidth;
-            const maxY = container.offsetHeight - button.offsetHeight;
-            const newX = Math.random() * maxX;
-            const newY = Math.random() * maxY;
-            button.style.left = `${newX}px`;
-            button.style.top = `${newY}px`;
-        }
     </script>
 </body>
 </html>
