@@ -22,23 +22,25 @@
 
         /* Carrousel */
         .carousel {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: #ffe6f2; /* Fond rose doux pour éviter le noir */
+}
 
-        .carousel img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            animation: carousel 16s infinite;
-        }
+.carousel img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Éviter le zoom */
+    object-position: center; /* Centrer les images */
+    opacity: 0;
+    animation: carousel 16s infinite;
+}
 
         .carousel img:nth-child(1) {
             animation-delay: 0s;
