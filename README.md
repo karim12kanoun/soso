@@ -219,7 +219,25 @@
         function showLove() {
             alert("Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire NHABEEEEK ❤️");
         }
+       // Pétales de rose
+            for (let i = 0; i < 50; i++) {
+                let petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                document.body.appendChild(petal);
+            }
 
+            // Lumières scintillantes
+            for (let i = 0; i < 100; i++) {
+                let light = document.createElement('div');
+                light.classList.add('light');
+                light.style.left = Math.random() * 100 + 'vw';
+                light.style.top = Math.random() * 100 + 'vh';
+                light.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(light);
+            }
+        }
         // Bouton "Non" qui se déplace
         function moveButton(button) {
             const container = document.querySelector('.container');
