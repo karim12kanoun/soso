@@ -10,7 +10,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 80vh;
             margin: 0;
             font-family: 'Poppins', sans-serif;
             text-align: center;
@@ -92,6 +92,11 @@
         .carousel img:nth-child(2) { animation-delay: 4s; }
         .carousel img:nth-child(3) { animation-delay: 8s; }
         .carousel img:nth-child(4) { animation-delay: 12s; }
+        .carousel img:nth-child(5) { animation-delay: 0s; }
+        .carousel img:nth-child(6) { animation-delay: 4s; }
+        .carousel img:nth-child(7) { animation-delay: 8s; }
+        .carousel img:nth-child(8) { animation-delay: 12s; }
+        
 
         @keyframes carousel {
             0% { opacity: 0; }
@@ -108,7 +113,7 @@
             border-radius: 15px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(2px);
             z-index: 1;
         }
 
@@ -161,6 +166,173 @@
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
+        .letter-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.envelope {
+    width: 120px;
+    height: 100px;
+    background: #ff1493;
+    position: relative;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.5s;
+}
+
+.envelope .flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #ff66b2;
+    border-radius: 10px 10px 0 0;
+    transform-origin: top;
+    transition: transform 0.5s ease-in-out;
+}
+
+.letter {
+    width: 100px;
+    height: 80px;
+    background: white;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.open-letter-btn {
+    margin-top: 15px;
+    padding: 5px 10px;
+    font-size: 25px;
+    border: none;
+    background-color: #ff1493;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.open-letter-btn:hover {
+    background-color: #e60073;
+}
+
+/* Animation quand la lettre s'ouvre */
+.letter.open {
+    opacity: 1;
+    transform: translateY(20px);
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+/* Ajustements pour les tablettes et petits écrans */
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .carousel img {
+        width: 95vw;
+        height: auto;
+        max-height: 80vh;
+    }
+
+    button {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+}
+
+/* Ajustements pour les mobiles */
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: auto;
+        padding: 20px;
+    }
+
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .carousel img {
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+        border-radius: 15px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        width: 80%;
+        font-size: 16px;
+    }
+
+    .no {
+        position: relative;
+    }
+
+    .letter-container {
+        margin-top: 30px;
+    }
+}
+
+/* Pour éviter le débordement sur les très petits écrans */
+@media screen and (max-width: 480px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    .carousel img {
+        max-height: 60vh;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+/* Correction du flou sur Safari (Mac & iPhone) */
+@supports (-webkit-backdrop-filter: none) {
+    .container {
+        background: rgba(255, 255, 255, 0.8);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+}
+
+/* Éviter les bugs de scaling sur les écrans Retina */
+img {
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Fix du bouton "Non" qui bouge trop vite sur Mac */
+button.no {
+    transition: transform 0.3s ease-in-out, left 0.3s ease-in-out, top 0.3s ease-in-out;
+}
 
     </style>
 </head>
@@ -180,6 +352,10 @@
             <img src="photo2.jpg.jpg" alt="Photo 2">
             <img src="photo3.jpg.jpg" alt="Photo 3">
             <img src="photo4.jpg.jpg" alt="Photo 4">
+            <img src="photo5.jpg.jpg" alt="Photo 1">
+            <img src="photo6.jpg.jpg" alt="Photo 2">
+            <img src="photo7.jpg.jpg" alt="Photo 3">
+            <img src="photo8.jpg.jpg" alt="Photo 4">
         </div>
 
         <div class="container">
@@ -190,6 +366,17 @@
                 <button class="no" onclick="moveButton(this)">Non</button>
             </div>
         </div>
+       <div class="letter-container">
+    <div class="envelope" onclick="openLetter()">
+        <div class="flap"></div>
+    </div>
+    <div class="letter">
+        <p>Mon amour, je t'aime ❤️</p>
+    </div>
+</div>
+<button class="open-letter-btn" onclick="openLetter()"> ❤️</button>
+
+        
     </div>
 
     <script>
@@ -246,6 +433,19 @@
             button.style.left = `${Math.random() * 200}px`;
             button.style.top = `${Math.random() * 100}px`;
         }
+        function openLetter() {
+    let envelope = document.querySelector(".envelope");
+    let letter = document.querySelector(".letter");
+
+    console.log(envelope, letter); // Vérifie si les éléments existent
+
+    if (envelope && letter) {
+        envelope.classList.add("open");
+        letter.classList.add("open");
+    } else {
+        console.error("L'enveloppe ou la lettre n'a pas été trouvée !");
+    }
+}
     </script>
 </body>
 </html>
