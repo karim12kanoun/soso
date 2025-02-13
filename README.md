@@ -193,16 +193,24 @@
     </div>
 
     <script>
-        // Effet machine à écrire
+      document.addEventListener("DOMContentLoaded", function () {
         const text = "T'es la personne la plus importante de ma vie. Je t'aime plus que tout mon bébé ! ❤️";
         let index = 0;
+        let typewriterElement = document.getElementById('typewriter');
+        
         function typeWriter() {
+            if (index === 0) typewriterElement.innerHTML = ""; // Réinitialiser le texte
+            
             if (index < text.length) {
-                document.getElementById('typewriter').innerHTML += text.charAt(index);
+                typewriterElement.innerHTML += text.charAt(index);
                 index++;
                 setTimeout(typeWriter, 100);
             }
         }
+
+        // Démarrer l'effet une fois que la page est chargée
+        typeWriter();
+    });
         // Barre de chargement
         window.onload = function() {
             let progress = document.querySelector('.progress');
