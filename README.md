@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +16,7 @@
             overflow: hidden;
             flex-direction: column;
             position: relative;
-            background: #ffe6f2;
+            background: #ffe6f2; /* Fond rose pastel doux */
         }
 
         /* Écran de chargement */
@@ -27,7 +26,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ff1493;
+            background: #ff1493; /* Rose vif */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -55,14 +54,53 @@
             height: 100%;
             width: 0;
             background: white;
+            transition: width 3s linear;
         }
 
+        /* Masquer la page au début */
         .main-content {
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            pointer-events: none;
         }
 
+        /* Carrousel */
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            object-position: center center;
+            opacity: 0;
+            position: absolute;
+            animation: carousel 16s infinite;
+        }
+
+        .carousel img:nth-child(1) { animation-delay: 0s; }
+        .carousel img:nth-child(2) { animation-delay: 4s; }
+        .carousel img:nth-child(3) { animation-delay: 8s; }
+        .carousel img:nth-child(4) { animation-delay: 12s; }
+
+        @keyframes carousel {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            25% { opacity: 1; }
+            35% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Cadre blanc transparent */
         .container {
             background: rgba(255, 255, 255, 0.7);
             padding: 30px;
@@ -71,6 +109,17 @@
             position: relative;
             backdrop-filter: blur(8px);
             z-index: 1;
+        }
+
+        /* Texte défilant */
+        #typewriter {
+            font-size: 22px;
+            color: #ff1493;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #ff1493;
+            display: inline-block;
         }
 
         .buttons {
@@ -98,21 +147,33 @@
             color: white;
             position: absolute;
         }
+
     </style>
 </head>
 <body>
     <!-- Écran de chargement -->
     <div class="loading-screen">
-        <div class="loading-text">Bonne Saint-Valentin à distance mon cœur 💕 <br> Chargement en cours...</div>
+        <div class="loading-text">Chargement en cours...</div>
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
     </div>
 
-    <!-- Contenu principal -->
     <div class="main-content">
+        <audio autoplay loop>
+            <source src="votre-musique.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+
+        <div class="carousel">
+            <img src="photo1.jpg.jpg" alt="Photo 1">
+            <img src="photo2.jpg.jpg" alt="Photo 2">
+            <img src="photo3.jpg.jpg" alt="Photo 3">
+            <img src="photo4.jpg.jpg" alt="Photo 4">
+        </div>
+
         <div class="container">
-            <h2>Mon chat, tu veux bien être ma Valentine ? ❤️</h2>
+            <h2>Man chat, tu veux bien être ma Valentine ? ❤️</h2>
             <div id="typewriter"></div>
             <div class="buttons">
                 <button class="yes" onclick="showLove()">Oui</button>
@@ -122,52 +183,51 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        // Effet machine à écrire
+        const text = "T'es la personne la plus importante de ma vie. Je t'aime plus que tout mon bébé ! ❤️";
+        let index = 0;
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById('typewriter').innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Barre de chargement
+        window.onload = function() {
             let progress = document.querySelector('.progress');
             let loadingScreen = document.querySelector('.loading-screen');
             let mainContent = document.querySelector('.main-content');
 
-            let width = 0;
-            let interval = setInterval(() => {
-                width += 1;
-                progress.style.width = width + "%";
+            // Remplir la barre de progression
+            progress.style.width = "100%";
 
-                if (width >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        loadingScreen.style.opacity = "0";
-                        setTimeout(() => {
-                            loadingScreen.style.display = "none";
-                            mainContent.style.opacity = "1";
-                            mainContent.style.pointerEvents = "auto";
-                            typeWriter();
-                        }, 1000);
-                    }, 500);
-                }
-            }, 30); // Animation fluide de la barre de chargement
-        });
+            // Après 3 secondes, masquer l'écran de chargement et afficher la page
+            setTimeout(() => {
+                loadingScreen.style.opacity = "0";
+                setTimeout(() => {
+                    loadingScreen.style.display = "none";
+                    mainContent.style.opacity = "1";
+                    typeWriter(); // Démarrer l'effet machine à écrire
+                }, 1000);
+            }, 3000);
+        };
 
-        function typeWriter() {
-            const text = "T'es la personne la plus importante de ma vie. Je t'aime plus que tout mon bébé ! ❤️";
-            let index = 0;
-            function write() {
-                if (index < text.length) {
-                    document.getElementById('typewriter').innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(write, 100);
-                }
-            }
-            write();
-        }
-
+        // Affichage du message d'amour
         function showLove() {
-            alert("YOUHOUUUUU !!! Bebou t'es le plus beau cadeau que la vie m'ait donné, mon bonheur quotidien, ma plus belle histoire NHABEEEEK mon chatooon ❤️❤️❤️❤️❤️❤️❤️❤️");
+            alert("Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire NHABEEEEK ❤️");
         }
 
+        // Bouton "Non" qui se déplace
         function moveButton(button) {
-            let x = Math.random() * (window.innerWidth - button.offsetWidth - 50);
-            let y = Math.random() * (window.innerHeight - button.offsetHeight - 50);
-            button.style.transform = `translate(${x}px, ${y}px)`;
+            const container = document.querySelector('.container');
+            const maxX = container.offsetWidth - button.offsetWidth;
+            const maxY = container.offsetHeight - button.offsetHeight;
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            button.style.left = ${newX}px;
+            button.style.top = ${newY}px;
         }
     </script>
 </body>
