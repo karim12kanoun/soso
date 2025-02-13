@@ -140,10 +140,7 @@
     </div>
 
     <div class="main-content">
-        <audio autoplay loop>
-            <source src="votre-musique.mp3" type="audio/mpeg">
-            Votre navigateur ne supporte pas l'élément audio.
-        </audio>
+        
 
         <div class="container">
             <h2>Mon chat, tu veux bien être ma Valentine ? ❤️</h2>
