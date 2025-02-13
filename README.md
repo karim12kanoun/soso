@@ -90,6 +90,7 @@
 
         .buttons {
             margin-top: 20px;
+            margin-right: 46px;
             position: relative;
         }
 
@@ -185,7 +186,7 @@
 
         // Affichage du message d'amour
         function showLove() {
-            alert("Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire NHABEEEEK ❤️");
+            alert("YOUHOUUUUU !!! Bebou t'es le plus beau cadeau que la vie m'ait donné, mon bonheur quotidien, ma plus belle histoire NHABEEEEK mon chatooon ❤️❤️❤️❤️❤️❤️❤️❤️");
 
             // Pétales de rose
             for (let i = 0; i < 50; i++) {
