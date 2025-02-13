@@ -203,7 +203,6 @@
                 setTimeout(typeWriter, 100);
             }
         }
-
         // Barre de chargement
         window.onload = function() {
             let progress = document.querySelector('.progress');
