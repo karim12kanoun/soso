@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +17,7 @@
             overflow: hidden;
             flex-direction: column;
             position: relative;
+            background: black;
         }
 
         /* Carrousel */
@@ -35,17 +36,12 @@
 
         .carousel img {
             position: absolute;
-            width: 80%;  /* Réduction de la taille */
+            width: 80%;
             height: 80%;
             object-fit: cover;
             opacity: 0;
             animation: carousel 16s infinite;
         }
-
-        .carousel img:nth-child(1) { animation-delay: 0s; }
-        .carousel img:nth-child(2) { animation-delay: 4s; }
-        .carousel img:nth-child(3) { animation-delay: 8s; }
-        .carousel img:nth-child(4) { animation-delay: 12s; }
 
         @keyframes carousel {
             0% { opacity: 0; }
@@ -55,15 +51,26 @@
             100% { opacity: 0; }
         }
 
-        /* Cadre blanc avec plus de transparence */
+        /* Cadre blanc transparent */
         .container {
-            background: rgba(255, 255, 255, 0.75); /* Plus transparent */
+            background: rgba(255, 255, 255, 0.75);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            backdrop-filter: blur(5px); /* Effet flou pour une meilleure lisibilité */
+            backdrop-filter: blur(5px);
             z-index: 1;
+        }
+
+        /* Texte défilant */
+        #typewriter {
+            font-size: 22px;
+            color: #ff1493;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #ff1493;
+            display: inline-block;
         }
 
         .buttons {
@@ -81,11 +88,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
         .yes {
             background-color: #ff1493;
             color: white;
@@ -97,47 +99,37 @@
             position: absolute;
         }
 
-        .love-message {
-            display: none;
-            font-size: 30px;
-            color: #ff1493;
-            font-weight: bold;
-            opacity: 0;
-            transform: scale(0.5);
-            animation: loveAnimation 2s forwards;
-        }
-
-        @keyframes loveAnimation {
-            0% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .hidden-message {
-            display: none;
-            font-size: 20px;
-            color: #d63384;
-            margin-top: 10px;
-        }
-
-        .hearts {
+        /* Pétales de rose */
+        .petal {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: red;
-            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0% 35%);
-            animation: float 4s infinite ease-in-out;
+            width: 15px;
+            height: 15px;
+            background-color: pink;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: fall linear infinite;
         }
 
-        @keyframes float {
+        @keyframes fall {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
-        .countdown {
-            font-size: 20px;
-            color: #ff1493;
-            margin-top: 10px;
+        /* Lumières scintillantes */
+        .light {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            opacity: 0.7;
+            animation: twinkle infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
@@ -147,7 +139,6 @@
         Votre navigateur ne supporte pas l'élément audio.
     </audio>
 
-    <!-- Carrousel en arrière-plan -->
     <div class="carousel">
         <img src="photo1.jpg.jpg" alt="Photo 1">
         <img src="photo2.jpg.jpg" alt="Photo 2">
@@ -156,41 +147,52 @@
     </div>
 
     <div class="container">
-        <h2>Man chat tu veux bien être ma Valentine ? 💖</h2>
+        <h2>Man chat, veux-tu être ma Valentine ? 💖</h2>
+        <div id="typewriter"></div> <!-- Effet machine à écrire -->
         <div class="buttons">
             <button class="yes" onclick="showLove()">Oui</button>
             <button class="no" onclick="moveButton(this)">Non</button>
         </div>
-        <div class="love-message">Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire. Je t’aime infiniment ! 💕</div>
-        <div class="hidden-message">Tu es la plus belle, mon amour éternel 😘</div>
-        <div class="countdown">Surprise dans <span id="timer">10</span> secondes...</div>
     </div>
 
     <script>
-        function showLove() {
-            document.querySelector('.love-message').style.display = 'block';
-            document.querySelector('.love-message').style.opacity = '1';
+        // Effet machine à écrire
+        const text = "Tu es la personne la plus importante de ma vie. Je t'aime plus que tout. 💖";
+        let index = 0;
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById('typewriter').innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        typeWriter();
 
-            for (let i = 0; i < 20; i++) {
-                let heart = document.createElement('div');
-                heart.classList.add('hearts');
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 4000);
+        // Affichage du message d'amour
+        function showLove() {
+            alert("Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire. Je t’aime infiniment ! 💕");
+
+            // Pétales de rose
+            for (let i = 0; i < 50; i++) {
+                let petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                document.body.appendChild(petal);
             }
 
-            let countdown = 10;
-            let timerInterval = setInterval(() => {
-                document.getElementById('timer').textContent = countdown;
-                countdown--;
-                if (countdown < 0) {
-                    clearInterval(timerInterval);
-                    document.querySelector('.hidden-message').style.display = 'block';
-                }
-            }, 1000);
+            // Lumières scintillantes
+            for (let i = 0; i < 100; i++) {
+                let light = document.createElement('div');
+                light.classList.add('light');
+                light.style.left = Math.random() * 100 + 'vw';
+                light.style.top = Math.random() * 100 + 'vh';
+                light.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(light);
+            }
         }
 
+        // Bouton "Non" qui se déplace
         function moveButton(button) {
             const container = document.querySelector('.container');
             const maxX = container.offsetWidth - button.offsetWidth;
