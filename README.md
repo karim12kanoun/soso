@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -16,14 +16,53 @@
             text-align: center;
             overflow: hidden;
             flex-direction: column;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            animation: gradientBG 10s ease infinite;
+            position: relative;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Arrière-plan en carrousel */
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: carousel 16s infinite;
+        }
+
+        .carousel img:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .carousel img:nth-child(2) {
+            animation-delay: 4s;
+        }
+
+        .carousel img:nth-child(3) {
+            animation-delay: 8s;
+        }
+
+        .carousel img:nth-child(4) {
+            animation-delay: 12s;
+        }
+
+        @keyframes carousel {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            25% { opacity: 1; }
+            35% { opacity: 0; }
+            100% { opacity: 0; }
         }
 
         .container {
@@ -33,6 +72,7 @@
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
             backdrop-filter: blur(10px);
+            z-index: 1;
         }
 
         .buttons {
@@ -103,58 +143,10 @@
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
 
-        .gallery {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .gallery img {
-            width: 200px;
-            height: auto;
-            border-radius: 10px;
-            display: none;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.1);
-        }
-
         .countdown {
             font-size: 20px;
             color: #ff1493;
             margin-top: 10px;
-        }
-
-        .petal {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: url('https://www.transparenttextures.com/patterns/soft-pad.png') no-repeat;
-            background-size: cover;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        .light {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            animation: twinkle 2s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
         }
     </style>
 </head>
@@ -164,6 +156,14 @@
         Votre navigateur ne supporte pas l'élément audio.
     </audio>
 
+    <!-- Carrousel en arrière-plan -->
+    <div class="carousel">
+        <img src="photo1.jpg.jpg" alt="Photo 1">
+        <img src="photo2.jpg.jpg" alt="Photo 2">
+        <img src="photo3.jpg.jpg" alt="Photo 3">
+        <img src="photo4.jpg.jpg" alt="Photo 4">
+    </div>
+
     <div class="container">
         <h2>Man chat tu veux bien être ma Valentine ? 💖</h2>
         <div class="buttons">
@@ -172,12 +172,6 @@
         </div>
         <div class="love-message">Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire. Je t’aime infiniment ! 💕</div>
         <div class="hidden-message">Tu es la plus belle, mon amour éternel 😘</div>
-        <div class="gallery">
-            <img src="photo1.jpg.jpg" class="photo">
-            <img src="photo2.jpg.jpg" class="photo">
-            <img src="photo3.jpg.jpg" class="photo">
-            <img src="photo4.jpg.jpg" class="photo">
-        </div>
         <div class="countdown">Surprise dans <span id="timer">10</span> secondes...</div>
     </div>
 
@@ -195,36 +189,6 @@
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 4000);
             }
-
-            // Pétales de rose
-            for (let i = 0; i < 50; i++) {
-                let petal = document.createElement('div');
-                petal.classList.add('petal');
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                document.body.appendChild(petal);
-            }
-
-            // Lumières scintillantes
-            for (let i = 0; i < 100; i++) {
-                let light = document.createElement('div');
-                light.classList.add('light');
-                light.style.left = Math.random() * 100 + 'vw';
-                light.style.top = Math.random() * 100 + 'vh';
-                light.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                document.body.appendChild(light);
-            }
-
-            // Galerie photo
-            let photos = document.querySelectorAll('.photo');
-            let index = 0;
-            function showNextPhoto() {
-                photos.forEach(photo => photo.style.display = 'none');
-                photos[index].style.display = 'block';
-                index = (index + 1) % photos.length;
-                setTimeout(showNextPhoto, 3000);
-            }
-            showNextPhoto();
 
             // Compte à rebours
             let countdown = 10;
