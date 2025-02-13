@@ -176,7 +176,7 @@
 
 .envelope {
     width: 120px;
-    height: 100px;
+    height: 110px;
     background: #ff1493;
     position: relative;
     border-radius: 10px;
