@@ -377,7 +377,7 @@ button.no {
 <button class="open-letter-btn" onclick="openLetter()"> ❤️</button>
 
         
-    </div>
+    
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
