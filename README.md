@@ -127,9 +127,43 @@
             color: #ff1493;
             margin-top: 10px;
         }
+
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('https://www.transparenttextures.com/patterns/soft-pad.png') no-repeat;
+            background-size: cover;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .light {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
+    <audio autoplay loop>
+        <source src="votre-musique.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'élément audio.
+    </audio>
+
     <div class="container">
         <h2>Man chat tu veux bien être ma Valentine ? 💖</h2>
         <div class="buttons">
@@ -146,10 +180,13 @@
         </div>
         <div class="countdown">Surprise dans <span id="timer">10</span> secondes...</div>
     </div>
+
     <script>
         function showLove() {
             document.querySelector('.love-message').style.display = 'block';
             document.querySelector('.love-message').style.opacity = '1';
+
+            // Cœurs animés
             for (let i = 0; i < 20; i++) {
                 let heart = document.createElement('div');
                 heart.classList.add('hearts');
@@ -158,6 +195,27 @@
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 4000);
             }
+
+            // Pétales de rose
+            for (let i = 0; i < 50; i++) {
+                let petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                document.body.appendChild(petal);
+            }
+
+            // Lumières scintillantes
+            for (let i = 0; i < 100; i++) {
+                let light = document.createElement('div');
+                light.classList.add('light');
+                light.style.left = Math.random() * 100 + 'vw';
+                light.style.top = Math.random() * 100 + 'vh';
+                light.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(light);
+            }
+
+            // Galerie photo
             let photos = document.querySelectorAll('.photo');
             let index = 0;
             function showNextPhoto() {
@@ -167,6 +225,8 @@
                 setTimeout(showNextPhoto, 3000);
             }
             showNextPhoto();
+
+            // Compte à rebours
             let countdown = 10;
             let timerInterval = setInterval(() => {
                 document.getElementById('timer').textContent = countdown;
@@ -177,6 +237,7 @@
                 }
             }, 1000);
         }
+
         function moveButton(button) {
             const container = document.querySelector('.container');
             const maxX = container.offsetWidth - button.offsetWidth;
