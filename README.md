@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
             position: relative;
         }
 
-        /* Arrière-plan en carrousel */
+        /* Carrousel */
         .carousel {
             position: absolute;
             top: 0;
@@ -28,34 +28,24 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .carousel img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            width: 80%;  /* Réduction de la taille */
+            height: 80%;
             object-fit: cover;
             opacity: 0;
             animation: carousel 16s infinite;
         }
 
-        .carousel img:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .carousel img:nth-child(2) {
-            animation-delay: 4s;
-        }
-
-        .carousel img:nth-child(3) {
-            animation-delay: 8s;
-        }
-
-        .carousel img:nth-child(4) {
-            animation-delay: 12s;
-        }
+        .carousel img:nth-child(1) { animation-delay: 0s; }
+        .carousel img:nth-child(2) { animation-delay: 4s; }
+        .carousel img:nth-child(3) { animation-delay: 8s; }
+        .carousel img:nth-child(4) { animation-delay: 12s; }
 
         @keyframes carousel {
             0% { opacity: 0; }
@@ -65,13 +55,14 @@
             100% { opacity: 0; }
         }
 
+        /* Cadre blanc avec plus de transparence */
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.75); /* Plus transparent */
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px); /* Effet flou pour une meilleure lisibilité */
             z-index: 1;
         }
 
@@ -180,7 +171,6 @@
             document.querySelector('.love-message').style.display = 'block';
             document.querySelector('.love-message').style.opacity = '1';
 
-            // Cœurs animés
             for (let i = 0; i < 20; i++) {
                 let heart = document.createElement('div');
                 heart.classList.add('hearts');
@@ -190,7 +180,6 @@
                 setTimeout(() => heart.remove(), 4000);
             }
 
-            // Compte à rebours
             let countdown = 10;
             let timerInterval = setInterval(() => {
                 document.getElementById('timer').textContent = countdown;
