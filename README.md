@@ -154,7 +154,7 @@
 <body>
     <!-- Écran de chargement -->
     <div class="loading-screen">
-        <div class="loading-text">Chargement en cours...</div>
+        <div class="loading-text">Bonne saint valentin mon chat ! <br> Chargement en cours...</div>
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
