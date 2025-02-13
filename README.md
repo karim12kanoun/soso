@@ -21,24 +21,27 @@
         }
 
         /* Carrousel */
-        .carousel {
+  .carousel {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
     overflow: hidden;
-    background: #ffe6f2; /* Fond rose doux pour éviter le noir */
+    background: #ffe6f2; /* Fond rose doux */
+    display: flex; /* Permet de centrer les images */
+    justify-content: center;
+    align-items: center;
 }
 
 .carousel img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Éviter le zoom */
-    object-position: center; /* Centrer les images */
+    width: 100vw; /* Largeur de l'écran */
+    height: 100vh; /* Hauteur de l'écran */
+    object-fit: cover; /* Évite le zoom excessif */
+    object-position: center center; /* Centre l'image */
     opacity: 0;
+    position: absolute;
     animation: carousel 16s infinite;
 }
 
