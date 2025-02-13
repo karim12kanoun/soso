@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -61,46 +61,10 @@
         .main-content {
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            pointer-events: none; /* Désactive les boutons au début */
         }
 
-        /* Carrousel */
-        .carousel {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .carousel img {
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            object-position: center center;
-            opacity: 0;
-            position: absolute;
-            animation: carousel 16s infinite;
-        }
-
-        .carousel img:nth-child(1) { animation-delay: 0s; }
-        .carousel img:nth-child(2) { animation-delay: 4s; }
-        .carousel img:nth-child(3) { animation-delay: 8s; }
-        .carousel img:nth-child(4) { animation-delay: 12s; }
-
-        @keyframes carousel {
-            0% { opacity: 0; }
-            10% { opacity: 1; }
-            25% { opacity: 1; }
-            35% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-
-        /* Cadre blanc transparent */
+        /* Cadre blanc */
         .container {
             background: rgba(255, 255, 255, 0.7);
             padding: 30px;
@@ -111,17 +75,7 @@
             z-index: 1;
         }
 
-        /* Texte défilant */
-        #typewriter {
-            font-size: 22px;
-            color: #ff1493;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid #ff1493;
-            display: inline-block;
-        }
-
+        /* Boutons */
         .buttons {
             margin-top: 20px;
             position: relative;
@@ -180,12 +134,11 @@
             0% { opacity: 0.2; }
             100% { opacity: 1; }
         }
-
     </style>
 </head>
 <body>
     <div class="loading-screen">
-        <div class="loading-text">Chargement en cours...</div>
+        <div class="loading-text"> Bonne saint valentin a distance mon couer <br> Chargement en cours...</div>
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
@@ -196,13 +149,6 @@
             <source src="votre-musique.mp3" type="audio/mpeg">
             Votre navigateur ne supporte pas l'élément audio.
         </audio>
-
-        <div class="carousel">
-            <img src="photo1.jpg.jpg" alt="Photo 1">
-            <img src="photo2.jpg.jpg" alt="Photo 2">
-            <img src="photo3.jpg.jpg" alt="Photo 3">
-            <img src="photo4.jpg.jpg" alt="Photo 4">
-        </div>
 
         <div class="container">
             <h2>Man chat, tu veux bien être ma Valentine ? ❤️</h2>
@@ -215,16 +161,6 @@
     </div>
 
     <script>
-        const text = "T'es la personne la plus importante de ma vie. Je t'aime plus que tout mon bébé ! ❤️";
-        let index = 0;
-        function typeWriter() {
-            if (index < text.length) {
-                document.getElementById('typewriter').innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 100);
-            }
-        }
-
         window.onload = function() {
             let progress = document.querySelector('.progress');
             let loadingScreen = document.querySelector('.loading-screen');
@@ -237,28 +173,56 @@
                 setTimeout(() => {
                     loadingScreen.style.display = "none";
                     mainContent.style.opacity = "1";
+                    mainContent.style.pointer-events = "auto"; // Active les boutons
                     typeWriter();
-
-                    for (let i = 0; i < 50; i++) {
-                        let petal = document.createElement('div');
-                        petal.classList.add('petal');
-                        petal.style.left = Math.random() * 100 + 'vw';
-                        petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                        document.body.appendChild(petal);
-                    }
-
-                    for (let i = 0; i < 100; i++) {
-                        let light = document.createElement('div');
-                        light.classList.add('light');
-                        light.style.left = Math.random() * 100 + 'vw';
-                        light.style.top = Math.random() * 100 + 'vh';
-                        light.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                        document.body.appendChild(light);
-                    }
-
+                    createEffects();
                 }, 1000);
             }, 3000);
         };
+
+        function typeWriter() {
+            const text = "T'es la personne la plus importante de ma vie. Je t'aime plus que tout mon bébé ! ❤️";
+            let index = 0;
+            function write() {
+                if (index < text.length) {
+                    document.getElementById('typewriter').innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(write, 100);
+                }
+            }
+            write();
+        }
+
+        function showLove() {
+            alert("YOUHOUUUUU !!! Bebou t'es le plus beau cadeau que la vie m'ait donné, mon bonheur quotidien, ma plus belle histoire NHABEEEEK mon chatooon ❤️❤️❤️❤️❤️❤️❤️❤️");
+        }
+
+        function moveButton(button) {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            button.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function createEffects() {
+            // Pétales de rose
+            for (let i = 0; i < 50; i++) {
+                let petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                document.body.appendChild(petal);
+            }
+
+            // Lumières scintillantes
+            for (let i = 0; i < 100; i++) {
+                let light = document.createElement('div');
+                light.classList.add('light');
+                light.style.left = Math.random() * 100 + 'vw';
+                light.style.top = Math.random() * 100 + 'vh';
+                light.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(light);
+            }
+        }
     </script>
 </body>
 </html>
