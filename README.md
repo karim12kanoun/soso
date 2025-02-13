@@ -55,16 +55,14 @@
             height: 100%;
             width: 0;
             background: white;
-            transition: width 3s linear;
         }
 
         .main-content {
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            pointer-events: none; /* Désactive les boutons au début */
+            pointer-events: none;
         }
 
-        /* Cadre blanc */
         .container {
             background: rgba(255, 255, 255, 0.7);
             padding: 30px;
@@ -75,7 +73,6 @@
             z-index: 1;
         }
 
-        /* Boutons */
         .buttons {
             margin-top: 20px;
             position: relative;
@@ -102,7 +99,6 @@
             position: absolute;
         }
 
-        /* Pétales de rose */
         .petal {
             position: absolute;
             width: 15px;
@@ -118,7 +114,6 @@
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Lumières scintillantes */
         .light {
             position: absolute;
             width: 5px;
@@ -138,7 +133,7 @@
 </head>
 <body>
     <div class="loading-screen">
-        <div class="loading-text"> Bonne saint valentin a distance mon couer <br> Chargement en cours...</div>
+        <div class="loading-text">Bonne Saint-Valentin à distance mon cœur 💕 <br> Chargement en cours...</div>
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
@@ -151,7 +146,7 @@
         </audio>
 
         <div class="container">
-            <h2>Man chat, tu veux bien être ma Valentine ? ❤️</h2>
+            <h2>Mon chat, tu veux bien être ma Valentine ? ❤️</h2>
             <div id="typewriter"></div>
             <div class="buttons">
                 <button class="yes" onclick="showLove()">Oui</button>
@@ -161,24 +156,31 @@
     </div>
 
     <script>
-        window.onload = function() {
+        document.addEventListener("DOMContentLoaded", function () {
             let progress = document.querySelector('.progress');
             let loadingScreen = document.querySelector('.loading-screen');
             let mainContent = document.querySelector('.main-content');
 
-            progress.style.width = "100%";
+            let width = 0;
+            function updateProgress() {
+                if (width >= 100) {
+                    loadingScreen.style.opacity = "0";
+                    setTimeout(() => {
+                        loadingScreen.style.display = "none";
+                        mainContent.style.opacity = "1";
+                        mainContent.style.pointer-events = "auto";
+                        typeWriter();
+                        createEffects();
+                    }, 1000);
+                } else {
+                    width += 1;
+                    progress.style.width = width + "%";
+                    requestAnimationFrame(updateProgress);
+                }
+            }
 
-            setTimeout(() => {
-                loadingScreen.style.opacity = "0";
-                setTimeout(() => {
-                    loadingScreen.style.display = "none";
-                    mainContent.style.opacity = "1";
-                    mainContent.style.pointer-events = "auto"; // Active les boutons
-                    typeWriter();
-                    createEffects();
-                }, 1000);
-            }, 3000);
-        };
+            requestAnimationFrame(updateProgress);
+        });
 
         function typeWriter() {
             const text = "T'es la personne la plus importante de ma vie. Je t'aime plus que tout mon bébé ! ❤️";
@@ -204,7 +206,6 @@
         }
 
         function createEffects() {
-            // Pétales de rose
             for (let i = 0; i < 50; i++) {
                 let petal = document.createElement('div');
                 petal.classList.add('petal');
@@ -213,7 +214,6 @@
                 document.body.appendChild(petal);
             }
 
-            // Lumières scintillantes
             for (let i = 0; i < 100; i++) {
                 let light = document.createElement('div');
                 light.classList.add('light');
