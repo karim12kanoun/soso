@@ -99,6 +99,7 @@
             position: absolute;
         }
 
+        /* Effets visuels */
         .petal {
             position: absolute;
             width: 15px;
@@ -139,8 +140,7 @@
         </div>
     </div>
 
-    <div class="main-content">
-        
+   
 
         <div class="container">
             <h2>Mon chat, tu veux bien être ma Valentine ? ❤️</h2>
@@ -159,24 +159,24 @@
             let mainContent = document.querySelector('.main-content');
 
             let width = 0;
-            function updateProgress() {
-                if (width >= 100) {
-                    loadingScreen.style.opacity = "0";
-                    setTimeout(() => {
-                        loadingScreen.style.display = "none";
-                        mainContent.style.opacity = "1";
-                        mainContent.style.pointer-events = "auto";
-                        typeWriter();
-                        createEffects();
-                    }, 1000);
-                } else {
-                    width += 1;
-                    progress.style.width = width + "%";
-                    requestAnimationFrame(updateProgress);
-                }
-            }
+            let interval = setInterval(() => {
+                width += 1;
+                progress.style.width = width + "%";
 
-            requestAnimationFrame(updateProgress);
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = "0";
+                        setTimeout(() => {
+                            loadingScreen.style.display = "none";
+                            mainContent.style.opacity = "1";
+                            mainContent.style.pointer-events = "auto";
+                            typeWriter();
+                            createEffects();
+                        }, 1000);
+                    }, 500);
+                }
+            }, 30); // Augmente la barre de progression progressivement
         });
 
         function typeWriter() {
