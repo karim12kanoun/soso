@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pour Toi, Mon Amour 💖</title>
+    <title>Pour Toi, Mon Amour ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -17,7 +17,7 @@
             overflow: hidden;
             flex-direction: column;
             position: relative;
-            background: black;
+            background: #ffe6f2; /* Fond rose pastel doux */
         }
 
         /* Carrousel */
@@ -29,18 +29,28 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .carousel img {
             position: absolute;
-            width: 80%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0;
             animation: carousel 16s infinite;
+        }
+
+        .carousel img:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .carousel img:nth-child(2) {
+            animation-delay: 4s;
+        }
+        .carousel img:nth-child(3) {
+            animation-delay: 8s;
+        }
+        .carousel img:nth-child(4) {
+            animation-delay: 12s;
         }
 
         @keyframes carousel {
@@ -53,12 +63,12 @@
 
         /* Cadre blanc transparent */
         .container {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.7); /* Plus transparent */
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px); /* Flou léger */
             z-index: 1;
         }
 
@@ -147,7 +157,7 @@
     </div>
 
     <div class="container">
-        <h2>Man chat, veux-tu être ma Valentine ? 💖</h2>
+        <h2>Man chat, tu veux bien être ma Valentine ? ❤️</h2>
         <div id="typewriter"></div> <!-- Effet machine à écrire -->
         <div class="buttons">
             <button class="yes" onclick="showLove()">Oui</button>
@@ -157,7 +167,7 @@
 
     <script>
         // Effet machine à écrire
-        const text = "Tu es la personne la plus importante de ma vie. Je t'aime plus que tout. 💖";
+        const text = "T'es la personne la plus importante de ma vie. Je t'aime plus que tout mon bébé ! ❤️";
         let index = 0;
         function typeWriter() {
             if (index < text.length) {
@@ -170,7 +180,7 @@
 
         // Affichage du message d'amour
         function showLove() {
-            alert("Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire. Je t’aime infiniment ! 💕");
+            alert("Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire NHABEEEEK ❤️");
 
             // Pétales de rose
             for (let i = 0; i < 50; i++) {
