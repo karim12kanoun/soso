@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -149,6 +149,19 @@
             position: absolute;
         }
 
+        /* Animation de fleurs */
+        .flower {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            animation: fall 4s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
     </style>
 </head>
 <body>
@@ -160,11 +173,7 @@
         </div>
     </div>
 
-    <div class="main-content">
-        <audio autoplay loop>
-            <source src="votre-musique.mp3" type="audio/mpeg">
-            Votre navigateur ne supporte pas l'élément audio.
-        </audio>
+   
 
         <div class="carousel">
             <img src="photo1.jpg.jpg" alt="Photo 1">
@@ -201,34 +210,34 @@
             let loadingScreen = document.querySelector('.loading-screen');
             let mainContent = document.querySelector('.main-content');
 
-            // Remplir la barre de progression
             progress.style.width = "100%";
-
-            // Après 3 secondes, masquer l'écran de chargement et afficher la page
             setTimeout(() => {
                 loadingScreen.style.opacity = "0";
                 setTimeout(() => {
                     loadingScreen.style.display = "none";
                     mainContent.style.opacity = "1";
-                    typeWriter(); // Démarrer l'effet machine à écrire
+                    typeWriter();
                 }, 1000);
             }, 3000);
         };
 
-        // Affichage du message d'amour
+        // Animation de fleurs
         function showLove() {
-            alert("Bebou, tu es mon plus beau cadeau, mon bonheur quotidien, ma plus belle histoire NHABEEEEK ❤️");
+            for (let i = 0; i < 30; i++) {
+                let flower = document.createElement("div");
+                flower.className = "flower";
+                flower.style.left = Math.random() * 100 + "vw";
+                flower.style.animationDuration = Math.random() * 2 + 3 + "s";
+                flower.innerHTML = "🌸";
+                document.body.appendChild(flower);
+                setTimeout(() => { flower.remove(); }, 4000);
+            }
+            alert("Bebou, NHABEEEEK ❤️");
         }
 
-        // Bouton "Non" qui se déplace
         function moveButton(button) {
-            const container = document.querySelector('.container');
-            const maxX = container.offsetWidth - button.offsetWidth;
-            const maxY = container.offsetHeight - button.offsetHeight;
-            const newX = Math.random() * maxX;
-            const newY = Math.random() * maxY;
-            button.style.left = ${newX}px;
-            button.style.top = ${newY}px;
+            button.style.left = `${Math.random() * 200}px`;
+            button.style.top = `${Math.random() * 100}px`;
         }
     </script>
 </body>
