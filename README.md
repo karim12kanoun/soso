@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -226,8 +227,8 @@
             const maxY = container.offsetHeight - button.offsetHeight;
             const newX = Math.random() * maxX;
             const newY = Math.random() * maxY;
-            button.style.left = ${newX}px;
-            button.style.top = ${newY}px;
+            button.style.left = `${newX}px`;
+            button.style.top = `${newY}px`;
         }
     </script>
 </body>
